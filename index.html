@@ -8,15 +8,15 @@
 </head>
 <body>
 
-<div class="container">
 <button id="login-google">Entrar con Google</button>
 
+<div class="container">
   <header>
     <h1>💸 Dashboard de Gastos</h1>
     <button id="logout">Salir</button>
   </header>
 
-  <section class="card form-card">
+  <section class="card">
     <h2>Nuevo gasto</h2>
     <form id="form-gasto">
       <input type="number" id="monto" placeholder="Monto" required>
@@ -25,6 +25,8 @@
         <option>Transporte</option>
         <option>Ocio</option>
         <option>Servicios</option>
+        <option>Universidad</option>
+        <option>Principito</option>
         <option>Otros</option>
       </select>
       <input type="date" id="fecha" required>
@@ -35,12 +37,12 @@
 
   <section class="grid">
     <div class="card">
-      <h3>Total del mes</h3>
+      <h3>Total</h3>
       <p id="total">$0</p>
     </div>
 
     <div class="card">
-      <h3>Gastos por categoría</h3>
+      <h3>Por categoría</h3>
       <canvas id="grafica"></canvas>
     </div>
   </section>
@@ -49,7 +51,6 @@
     <h3>Historial</h3>
     <ul id="lista-gastos"></ul>
   </section>
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -1,0 +1,57 @@
+<<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard de Gastos</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <h1>💸 Dashboard de Gastos</h1>
+    <button id="logout">Salir</button>
+  </header>
+
+  <section class="card form-card">
+    <h2>Nuevo gasto</h2>
+    <form id="form-gasto">
+      <input type="number" id="monto" placeholder="Monto" required>
+      <select id="categoria">
+        <option>Comida</option>
+        <option>Transporte</option>
+        <option>Ocio</option>
+        <option>Servicios</option>
+        <option>Otros</option>
+      </select>
+      <input type="date" id="fecha" required>
+      <input type="text" id="nota" placeholder="Nota opcional">
+      <button type="submit">Agregar</button>
+    </form>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <h3>Total del mes</h3>
+      <p id="total">$0</p>
+    </div>
+
+    <div class="card">
+      <h3>Gastos por categoría</h3>
+      <canvas id="grafica"></canvas>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3>Historial</h3>
+    <ul id="lista-gastos"></ul>
+  </section>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

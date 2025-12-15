@@ -112,42 +112,39 @@ function renderGrafica(data) {
 document.getElementById('btn-descargar').addEventListener('click', () => {
     const btn = document.getElementById('btn-descargar');
     
-    // 1. Ocultamos el botón para que no salga en la foto del PDF
+    // Ocultar botón
     btn.style.display = 'none';
 
-    // 2. Seleccionamos el cuerpo de la página
+    // Seleccionamos el body
     const elementoParaImprimir = document.body; 
     
-    // 3. Obtenemos la fecha actual
+    // Fecha
     const fecha = new Date();
     const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
     const fechaFormateada = fecha.toLocaleDateString('es-MX', opciones);
 
-    // 4. Creamos el footer (Pie de página) temporal
+    // Crear Footer
     const footer = document.createElement('div');
+    // Le damos estilo inline para asegurar que se centre en el PDF
     footer.innerHTML = `
-        <div style="width:100%; text-align:center; margin-top: 50px; padding: 20px; font-family: sans-serif; color: #d63384; border-top: 2px dashed #ffb7b2;">
-            <p style="font-weight: bold; margin: 5px;">Hecho por tu principito con mucho amor ❤️</p>
-            <p style="font-size: 0.9em; color: #777;">${fechaFormateada}</p>
+        <div style="width:100%; text-align:center; margin-top: 40px; padding: 20px; color: #d63384; border-top: 1px solid #ffb7b2;">
+            <p style="font-weight: bold; margin: 0;">Hecho por tu principito con mucho amor ❤️</p>
+            <p style="font-size: 12px; margin-top: 5px;">${fechaFormateada}</p>
         </div>
     `;
     
-    // Lo agregamos al final del documento
     elementoParaImprimir.appendChild(footer);
 
-    // 5. Configuración del PDF
     var opt = {
-        margin:       [0.5, 0.5, 0.5, 0.5],
-        filename:     'carta_para_mixel.pdf',
+        margin:       0.5,
+        filename:     'para_mixel.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true }, 
+        html2canvas:  { scale: 2, scrollY: 0 }, // scrollY: 0 ayuda a que no salga cortado
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
-    // 6. Generar y Guardar
     html2pdf().set(opt).from(elementoParaImprimir).save().then(() => {
-        // Una vez descargado, limpiamos todo:
-        elementoParaImprimir.removeChild(footer); // Quitamos el footer
-        btn.style.display = 'block'; // Volvemos a mostrar el botón
+        elementoParaImprimir.removeChild(footer);
+        btn.style.display = 'block';
     });
 });

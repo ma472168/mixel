@@ -4,9 +4,25 @@
 }
 
 body {
-  margin: 0;
+  /*margin: 0;
   background: #f4f6fb;
-  color: #222;
+  color: #222;*/
+
+  display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    
+    /* Asegura que ocupe toda la pantalla y no se corte */
+    min-height: 100vh; 
+    margin: 0;
+    padding: 20px;
+    
+    /* Estilos de letra y color */
+    font-family: 'Arial', sans-serif;
+    background-color: #fff0f3;
+    text-align: center; /* Asegura que el texto interno también se centre */
+    box-sizing: border-box; /* Evita que el padding rompa el ancho en iPhone */
 }
 
 #login-google {
@@ -93,4 +109,18 @@ li {
   justify-content: space-between;
   padding: 10px 0;
   border-bottom: 1px solid #eee;
+}
+
+/* El estilo del botón */
+.boton-pdf {
+    background-color: #ff6b81;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30px; /* Espacio arriba del botón */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }

@@ -110,41 +110,53 @@ function renderGrafica(data) {
 }
 
 document.getElementById('btn-descargar').addEventListener('click', () => {
-    const btn = document.getElementById('btn-descargar');
-    
-    // Ocultar botón
-    btn.style.display = 'none';
+    // 1. Mensaje de prueba (Bórralo si te molesta después de que funcione)
+    alert("Iniciando generación de PDF... espera un momento.");
 
-    // Seleccionamos el body
-    const elementoParaImprimir = document.body; 
-    
-    // Fecha
+    // 2. Seleccionamos SOLO el área de la carta
+    const elemento = document.getElementById('area-imprimir');
+
+    // 3. Crear fecha y footer
     const fecha = new Date();
     const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
     const fechaFormateada = fecha.toLocaleDateString('es-MX', opciones);
 
-    // Crear Footer
+    // Creamos el footer
     const footer = document.createElement('div');
-    // Le damos estilo inline para asegurar que se centre en el PDF
     footer.innerHTML = `
-        <div style="width:100%; text-align:center; margin-top: 40px; padding: 20px; color: #d63384; border-top: 1px solid #ffb7b2;">
+        <div style="width:100%; text-align:center; margin-top: 20px; padding-top: 20px; color: #d63384; border-top: 1px solid #ffb7b2;">
             <p style="font-weight: bold; margin: 0;">Hecho por tu principito con mucho amor ❤️</p>
             <p style="font-size: 12px; margin-top: 5px;">${fechaFormateada}</p>
         </div>
     `;
     
-    elementoParaImprimir.appendChild(footer);
+    // Lo metemos temporalmente dentro del área a imprimir
+    elemento.appendChild(footer);
 
+    // 4. Configuración
     var opt = {
         margin:       0.5,
         filename:     'para_mixel.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, scrollY: 0 }, // scrollY: 0 ayuda a que no salga cortado
+        html2canvas:  { scale: 2 }, // Si falla en iPhone, cambia este 2 por un 1
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
-    html2pdf().set(opt).from(elementoParaImprimir).save().then(() => {
-        elementoParaImprimir.removeChild(footer);
-        btn.style.display = 'block';
-    });
+    // 5. Generar PDF con manejo de errores
+    html2pdf()
+        .set(opt)
+        .from(elemento)
+        .save()
+        .then(() => {
+            // Éxito: Quitamos el footer
+            elemento.removeChild(footer);
+            alert("¡PDF descargado con éxito!");
+        })
+        .catch((err) => {
+            // Error: Avisamos qué pasó
+            console.error(err);
+            alert("Hubo un error al crear el PDF: " + err);
+            // Aseguramos quitar el footer aunque falle
+            if(footer.parentNode) elemento.removeChild(footer);
+        });
 });

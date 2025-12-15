@@ -3,10 +3,10 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_AUTH_DOMAIN",
-  projectId: "TU_PROJECT_ID",
-  appId: "TU_APP_ID"
+  apiKey: "AIzaSyBTqDPmUiDnnuJNQPBrXJFqByFj0FiletA",
+  authDomain: "mixel-22133.firebaseapp.com",
+  projectId: "mixel-22133",
+  appId: "1:407899219850:web:f98738b953c788821a8a73"
 };
 
 const app = initializeApp(firebaseConfig);
